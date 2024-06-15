@@ -1,8 +1,8 @@
-defmodule ElixirInActionTest do
+defmodule ChapterThreeTest do
   use ExUnit.Case
-  doctest ElixirInAction
+  doctest ChapterThree
 
-  test "greets the world" do
-    assert ElixirInAction.hello() == :world
+  test "calculates correct length" do
+    assert ChapterThree.list_len([1, 5, 3]) == 3
   end
 end
