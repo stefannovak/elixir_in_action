@@ -32,4 +32,29 @@ defmodule ChapterThreeTest do
   test "calculates correct list" do
     assert ChapterThree.positive([1, 2, 3, 4, 5]) == [4, 2]
   end
+
+  # large_lines!/1
+
+  test "calculates the correct list of numbers" do
+    assert ChapterThree.large_lines!(".formatter.exs") == [22, 1, 67, 1]
+  end
+
+  # large_lines_length!/1
+
+  test "calculates the largest line of a given file" do
+    assert ChapterThree.large_lines_length!(".formatter.exs") == 67
+  end
+
+  # longest_line!/1
+
+  test "returns the longest line of a given file" do
+    assert ChapterThree.longest_line!(".formatter.exs") == "  inputs: [\"{mix,.formatter}.exs\", \"{config,lib,test}/**/*.{ex,exs}\"]\n"
+  end
+
+  # words_per_line!/1
+
+  test "returns the correct list of a word count per line" do
+    assert ChapterThree.words_per_line!(".formatter.exs") == [5, 1, 3, 1]
+  end
+
 end
