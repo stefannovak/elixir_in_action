@@ -40,9 +40,23 @@ defmodule TodoListTests do
          %{id: returnedEntry.id, date: returnedEntry.date, title: String.upcase(oldTitle)}
         end)
 
-
     # Assert
     {1, %{id: _, date: _, title: title}} = Enum.at(updated_todoList.entries, 0)
     assert title == String.upcase(entry.title)
+  end
+
+  test "delete_entry/2 successfully deletes an entry" do
+    # Arrange
+    first_entry = %{date: ~D[2018-12-19], title: "Dentist"}
+    second_entry = %{date: ~D[2018-12-20], title: "Dinner"}
+    todoList = TodoList.new
+      |> TodoList.add_entry(first_entry)
+      |> TodoList.add_entry(second_entry)
+
+    # Act
+    updated_todoList = TodoList.delete_entry(todoList, 1)
+
+    # Assert
+    assert_raise KeyError, fn -> TodoList.entries(updated_todoList, ~D[2018-12-19]) end
   end
 end

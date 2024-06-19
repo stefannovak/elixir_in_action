@@ -29,9 +29,14 @@ defmodule TodoList do
       :error -> todo_list
 
       {:ok, old_entry} ->
-        new_entry = updater_fun.(old_entry)
+        old_entry_id = old_entry.id
+        new_entry = %{id: ^old_entry_id} = updater_fun.(old_entry)
         new_entries = Map.put(todo_list.entries, new_entry.id, new_entry)
         %TodoList{todo_list | entries: new_entries}
     end
+  end
+
+  def delete_entry(todo_list, entry_id) do
+    Map.delete(todo_list.entries, entry_id)
   end
 end
