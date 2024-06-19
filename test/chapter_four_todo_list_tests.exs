@@ -2,9 +2,21 @@ defmodule TodoListTests do
   use ExUnit.Case
   doctest TodoList
 
-  # new/0
-  test "new/0 returns an empty TodoList struct" do
+  # new/1
+  test "new/1 returns an empty TodoList struct when called without arguments" do
     assert %TodoList{} = TodoList.new
+  end
+
+  test "new/1 returns a TodoList struct when called with arguments" do
+    # Arrange
+    entries = [%{date: ~D[2020-05-10], title: "Dentist"}, %{date: ~D[2020-05-05], title: "Gym"}]
+
+    # Act
+    todo_list = TodoList.new(entries)
+
+    # Assert
+    entries_length = Enum.count(todo_list.entries)
+    assert entries_length = Enum.count(entries)
   end
 
   # add_entry/2
