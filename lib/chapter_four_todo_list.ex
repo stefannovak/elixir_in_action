@@ -48,3 +48,16 @@ defmodule TodoList do
     Map.delete(todo_list.entries, entry_id)
   end
 end
+
+defmodule TodoListCsvImporter do
+  def new(file) do
+      File.stream!(file)
+      |> Stream.map(&String.trim/1)
+      |> Stream.map(fn element -> String.split(element, ",") |> List.to_tuple() end)
+      |> Stream.map(fn {date, title} -> [String.split(date, "/") |> List.to_tuple(), title] |> List.to_tuple() end)
+      |> Stream.map(fn {{year, month, day}, title} -> {{String.to_integer(year), String.to_integer(month), String.to_integer(day)}, title} end)
+      |> Stream.map(fn {{year, month, day}, title} -> {Date.new!(year, month, day), title} end)
+      |> Enum.map(fn {date, title} -> %{date: date, title: title} end)
+      |> TodoList.new()
+  end
+end

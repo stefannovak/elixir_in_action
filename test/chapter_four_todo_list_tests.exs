@@ -71,4 +71,12 @@ defmodule TodoListTests do
     # Assert
     assert_raise KeyError, fn -> TodoList.entries(updated_todoList, ~D[2018-12-19]) end
   end
+
+  test "TodoListCsvImporter new/1 reads a CSV file and creates a todo list" do
+    # Act
+    todo_list = TodoListCsvImporter.new("test/todos.csv")
+
+    # Assert
+    assert %TodoList{} = todo_list
+  end
 end
