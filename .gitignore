@@ -24,3 +24,5 @@ elixir_in_action-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/persist/
